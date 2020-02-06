@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "ParklyMobile",
-    "slug": "ParklyMobile",
+    "name": "ParklyMobileFinal",
+    "slug": "parklymobilefinal",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [

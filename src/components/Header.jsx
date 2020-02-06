@@ -57,28 +57,3 @@ const styles ={
         fontSize: 30
     }
 }
-
-/* <Typography variant='h5' style={{ color: '#565656',width:'50%' }}>
-                Parkly
-                </Typography>
-                {this.props.user===undefined ?
-                    <ButtonGroup variant="text" style={{ backgroundColor: '#ffffff',color:'#565656',width:'50%',justifyContent:'flex-end'}}>
-                        <Button
-                            onClick={this.logIn}>
-                            log in
-                        </Button>
-                        <Button
-                            onClick={this.createAccount}>
-                            sign up
-                        </Button>
-                    </ButtonGroup>:
-                    <ButtonGroup variant="text" style={{ backgroundColor: '#ffffff',color:'#565656',width:'50%',justifyContent:'flex-end'}}>
-                        <Button
-                            onClick={this.parkings}>
-                            parkings
-                        </Button>
-                        <Button
-                            onClick={this.logOut}>
-                            log out
-                        </Button>
-                    </ButtonGroup>} */

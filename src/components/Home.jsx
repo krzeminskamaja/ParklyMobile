@@ -12,44 +12,11 @@ import { connect } from 'react-redux';
 import { getUserToken,removeUserToken  } from './../actions';
 import {Keyboard} from 'react-native'
 import {TouchableWithoutFeedback} from 'react-native'
-//const ip = '192.168.110.195'
+import { ScrollView } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
 const ip = 'parkly-tuesday.us-east-1.elasticbeanstalk.com'
-  const list = [
-    {
-        id: 64,
-        city: "Bieda",
-        street: "Koszykowa",
-        streetNumber: 12,
-        numberOfSpots: 12,
-        workingHoursFrom: 8,
-        workingHoursTo: 20,
-        ownerID: {
-            "id": 54,
-            "firstName": "Ala",
-            "lastName": "Ala",
-            "email": "mala@mini.com",
-            "phoneNumber": 666555444,
-            "hashPassword": "mini"
-        }
-    },
-    {
-      id: 65,
-      city: "Gdańsk",
-      street: "Urzędnicza",
-      streetNumber: 12,
-      numberOfSpots: 12,
-      workingHoursFrom: 8,
-      workingHoursTo: 20,
-      ownerID: {
-          "id": 54,
-          "firstName": "Ala",
-          "lastName": "Ala",
-          "email": "mala@mini.com",
-          "phoneNumber": 666555444,
-          "hashPassword": "mini"
-      }
-  }
-  ]
+ 
   function Item({ id, title, selected, onSelect }) {
     return (
       <TouchableOpacity
@@ -84,24 +51,9 @@ _bootstrapAsync = () => {
   this.props.getUserToken()
   .then(() => {
     console.log('Home user token '+this.props.token.token)})
-  //    this.props.navigation.navigate(this.props.token.token !== null ? 'App' : 'Auth');
- // })
-  //    .catch(error => {
-  //        this.setState({ error })
-  //    })
+
 
 };
-getParkingsByOwnerId=(id)=>{
-    return fetch('http://10.68.23.42:8080/parkingOwner'
-        , {
-            method: 'GET', // or 'PUT'
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            dataType: 'json'
-            }
-          }).then((response) => response.json())
-}
    
 keyExtractor = (item, index) => index.toString()
 
@@ -115,23 +67,14 @@ renderItem = ({ item }) => (
   />
 )
 clickParking=(item)=>{
-   /* return fetch('http://10.68.23.42:8080/parkingOwner'
-    , {
-        method: 'GET', // or 'PUT'
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        dataType: 'json'
-        }
-      }).then((response) => response.json())*/
+   
       const {help} = this.props;
       console.log('jestesmy w clickparking')
       console.log(this.props.token.token)
 
-     // const tok = help.getParam('token','no data')
       const {navigate} = this.props.navigation;
       var url = 'http://'+ip+'/reservations/parking/'+item.id
-     // console.log(tok)
+    
       return fetch(url,{
         method: 'GET',
         headers:{
@@ -148,7 +91,7 @@ clickParking=(item)=>{
 }
 clickParkingMock(city,street)
 {
-    //const {navigate} = this.state.navigate;
+   
         return this.props.navigation('Reservations',city,street);
   
 }
@@ -174,30 +117,37 @@ logOut=()=>{
         console.log(this.state.token)
         console.log(ownerObject)
     return(
-        //<Text>Owner info: First name: {owner.firstName}</Text>
-  
+        
     <View style={{backgroundColor: '#E5CDC8', flex: 1 , justifyContent: "flex-start"} }>
-        <Header title={<Text>Hi {ownerObject.name}!</Text>} fontSize='30'></Header>
-       
+        <Header title={<Text>Hi {ownerObject.name}!</Text>} fontSize='30'>
+          
+        </Header>
+        
+         <ScrollView>
+         <SafeAreaView>
+         <Button 
+            title="log out"
+            onPress={this.logOut}
+           
+            buttonStyle={styles.button}>
+            
+            </Button>
         <Card style={{backgroundColor: '#C5979D'} }>
         
         <FlatList
-            ListHeaderComponent={<Text style={styles.listHeader}>Choose parking to see current reservations:</Text>}
+            ListHeaderComponent={<Text style={styles.listHeader}>Choose parking to see the reservations:</Text>}
             keyExtractor={this.keyExtractor}
             data={owner}
             renderItem={this.renderItem}
             onPress={this.clickParking}
             />
+           
         </Card>
-        <Card backgroundColor='#C5979D' >
-        <Button 
-            title="log out"
-            onPress={this.logOut}
-            //disabled={email.length===0 || password.length===0}
-            buttonStyle={styles.button}>
-            
-            </Button>
-        </Card>
+        
+        
+        </SafeAreaView>
+        </ScrollView>
+        
 
     </View>
     )
@@ -234,7 +184,7 @@ const styles = {
     },
 
     button:{
-      backgroundColor:'#C5979D'
+      backgroundColor:'#E5CDC8',
     },
     
     header:{
@@ -243,9 +193,9 @@ const styles = {
     },
 
     listHeader:{
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: 'normal',
-            color: '#331832',
+            color: '#C5979D',
             textAlign: 'center',
     }
 

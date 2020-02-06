@@ -12,40 +12,7 @@ import moment from 'moment'
 import { ScrollView } from 'react-native-gesture-handler'
 import {TouchableWithoutFeedback} from 'react-native'
 import {Keyboard} from 'react-native'
-const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-  ];
-  const list = [
-    {
-      "parkingId":64,
-        "dateFrom": "2020-01-19 09:00:00",
-        "dateTo": "2020-01-19 11:00:00",
-        "userFirstName": "Ala",
-        "userLastName": "Maja",
-        "userEmail": "first@last.pl",
-        "userToken":"ala"
-    },
-    {
-      "parkingId":64,
-        "dateFrom": "2020-01-20 09:00:00",
-        "dateTo": "2020-01-20 11:00:00",
-        "userFirstName": "Maja",
-        "userLastName": "Ala",
-        "userEmail": "first@last.pl",
-        "userToken":"ala"
-    }
-  ]
+
   function Item({ id, title, selected, onSelect }) {
     return (
       <TouchableOpacity
@@ -79,17 +46,6 @@ clickReservation=(item,number)=>
   const {navigate} = this.props.navigation;
   return navigate('ReservationDetails',{reservation: item, reservationNumber: number,city: city, street: street});
 }
-getParkingsByOwnerId=(id)=>{
-    return fetch('http://192.168.0.17:8080/parkingOwner'
-        , {
-            method: 'GET', // or 'PUT'
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-            dataType: 'json'
-            }
-          }).then((response) => response.json())
-}
 keyExtractor = (item, index) => index.toString()
 incrementCounter = () =>{this.setState({reservationCount: this.state.reservationCount+1})}
 findReservationNumer(index)
@@ -97,19 +53,15 @@ findReservationNumer(index)
   return index+1;
 }
 renderItem = ({ item,index }) => (
-    //"#"+this.findReservationNumer(index)+". " +
   <ListItem
     title={moment(item.dateFrom).format("MMM Do, hA") + " - " + moment(item.dateTo).format("MMM Do, hA")}
     bottomDivider
-    //chevron
     onPress={this.clickReservation.bind(this,item,this.findReservationNumer(index))}
-    //onBlur={this.incrementCounter}
   />
   
 )
 
     render(){
-        //const { navigation } = this.state.owner;
         const { navigation } = this.props;
         const cityData = JSON.stringify(navigation.getParam('city'));
         const city=cityData.substr(1,cityData.length-2);
@@ -118,11 +70,7 @@ renderItem = ({ item,index }) => (
         const reservationList = navigation.getParam('reservations','no data')
         console.log('Reservation list w Reservations')
         console.log(reservationList)
-        //this.setState({reservationCount: list.length})
     return(
-        //<Text>Owner info: First name: {owner.firstName}</Text>
-        
-       
         
     <View style={{backgroundColor: '#E5CDC8', flex: 1, justifyContent: "flex-start"} }>
         <Header title={city+", "+street} fontSize='25' ></Header>

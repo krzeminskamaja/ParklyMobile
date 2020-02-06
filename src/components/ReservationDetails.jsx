@@ -60,11 +60,7 @@ class ReservationDetails extends React.Component{
                           [reservation.userLastName],
                           [reservation.userEmail],
                           [reservation.totalCost+" PLN"]]
-        //console.log(tableInfo)
-        //this.setState({tableData: [[reservation.dateFrom],[reservation.dateTo]]})
-        //this.setState({reservationCount: list.length})
     return(
-        //<Text>Owner info: First name: {owner.firstName}</Text>
        
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>       
     <View style={{backgroundColor: '#E5CDC8' ,flex: 1} }>
