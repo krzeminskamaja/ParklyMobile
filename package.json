@@ -28,7 +28,7 @@
     "https-browserify": "0.0.1",
     "js-base64": "^2.5.1",
     "material-ui": "^0.20.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "parse-unit": "^1.0.1",
     "password-hash": "^1.2.2",
     "path-browserify": "0.0.0",
